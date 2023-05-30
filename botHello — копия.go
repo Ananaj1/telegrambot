@@ -40,10 +40,6 @@ type Updates struct {
 		} `json:"message"`
 	} `json:"result"`
 }
-
-// This struct for message from chat
-// Inline mode is not support
-
 type TeleAPI struct {
 	apiUrl    string
 	token     string
@@ -54,10 +50,6 @@ type TeleAPI struct {
 	timeout   int
 	limit     int
 }
-
-// Important: Long polling will work if offset param is send to bot api
-//
-//	and it equal message json field "update_id" + 1
 func (t *TeleAPI) GetUpdates() {
 
 	url := t.apiUrl + t.token + t.getMsg +
@@ -112,13 +104,7 @@ func (t *TeleAPI) SendMessage(chatID int64, name string, text string) {
 		resp, err := client.Do(req)
 		if err != nil {
 			log.Println(err)
-		} //else {
-		// Log sent message status
-		// var sentMsgStatus map[string]interface{}
-		// json.NewDecoder(resp.Body).Decode(&sentMsgStatus)
-		// Handle it if you want
-		// log.Println(sentMsgStatus)
-		//}
+		} 
 		defer resp.Body.Close()
 	}
 
